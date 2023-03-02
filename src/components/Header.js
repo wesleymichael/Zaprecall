@@ -15,6 +15,7 @@ const HeaderStyled = styled.header`
     height: 130px;
     position: fixed;
     top: 0;
+    z-index: 2;
     left: 50%;
     translate: -50% 0;
     display: flex;

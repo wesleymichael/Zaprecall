@@ -3,7 +3,7 @@ import logo from "../assets/logo.png"
 
 export default function TelaInicial(){
     return (
-        <DivTelaInicial status={'jogando'} >
+        <DivTelaInicial statusTelaInicial={'jogando'} >
             <img src={logo} alt="logo" />
         </DivTelaInicial>
     );
@@ -12,5 +12,5 @@ export default function TelaInicial(){
 
 //Algo assim?
 const DivTelaInicial = styled.div`
-    display: ${ (props) => props.status === 'jogando' ? 'none' : 'flex'};
+    display: ${ (props) => props.statusTelaInicial === 'jogando' ? 'none' : 'flex'};
 `

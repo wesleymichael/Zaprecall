@@ -6,12 +6,13 @@ import icone_certo from "../assets/icone_certo.png";
 import icone_erro from "../assets/icone_erro.png";
 import icone_quase from "../assets/icone_quase.png";
 
-export default function Question({card, cont, respondidos, setRespondidos}){
+export default function Question({card, numeroPergunta, respondidos, setRespondidos, contador}){
     const [statusCard, setStatuscard] = useState('virado');
     //VIRADO, EXIBIR_PERGUNTA, EXIBIR_RESPOSTA, AVALIADO
     const [iconePergunta, setIconePergunta] = useState(seta_play);
     //seta_play, icone_certo, icone_erro, icone_quase
-    const [cor, setCor] = useState('#333333')
+    const [cor, setCor] = useState('#333333');
+    const [iconeBtn, setIconeBtn] = useState('play-btn')
     
 
     function mostrarPergunta(card){
@@ -25,20 +26,24 @@ export default function Question({card, cont, respondidos, setRespondidos}){
 
     function avaliarCard(resultado){
         setStatuscard('avaliado');
+        contador();
         switch(resultado){
             case 'erro':
                 setIconePergunta(icone_erro);
                 setCor('#FF3030');
+                setIconeBtn('no-icon')
                 break;
             
             case 'quase':
                 setIconePergunta(icone_quase);
                 setCor('#FF922E');
+                setIconeBtn('partial-icon');
                 break;
             
             case 'certo':
                 setIconePergunta(icone_certo);
                 setCor('#2FBE34');
+                setIconeBtn('zap-icon');
                 break;
 
             default:
@@ -47,36 +52,36 @@ export default function Question({card, cont, respondidos, setRespondidos}){
     }
 
     return (
-        <>
+        <div data-test="flashcard">
             <Virado statusCard={statusCard} cor={cor} >
-                <h1>Pergunta {cont}</h1>
-                <button onClick={() => mostrarPergunta(card)} disabled={statusCard==='avaliado'}>
+                <h1 data-test="flashcard-text">Pergunta {numeroPergunta}</h1>
+                <button onClick={() => mostrarPergunta(card)} disabled={statusCard==='avaliado'} data-test={iconeBtn}>
                     <img src={iconePergunta} alt="icone"/>
                 </button>
             </Virado>
 
             <ExibirPergunta statusCard={statusCard}>
-                <h1>{card.question}</h1>
-                <button onClick={() => mostrarResposta(card) }>
+                <h1 data-test="flashcard-text">{card.question}</h1>
+                <button onClick={() => mostrarResposta(card)} data-test="turn-btn">
                     <img src={seta_virar} alt="virar"/>
                 </button>
             </ExibirPergunta>
 
             <ExibirResposta statusCard={statusCard} >
-                <h1>{card.answer}</h1>
+                <h1 data-test="flashcard-text">{card.answer}</h1>
                 <div>
-                    <Button cor={'#FF3030'} onClick={() => avaliarCard('erro')}>
+                    <Button cor={'#FF3030'} onClick={() => avaliarCard('erro')} data-test="no-btn">
                         Não lembrei
                     </Button>
-                    <Button cor={'#FF922E'} onClick={() => avaliarCard('quase')} >
+                    <Button cor={'#FF922E'} onClick={() => avaliarCard('quase')} data-test="partial-btn">
                         Quase não lembrei
                     </Button>
-                    <Button cor={'#2FBE34'} onClick={() => avaliarCard('certo')} >
+                    <Button cor={'#2FBE34'} onClick={() => avaliarCard('certo')} data-test="zap-btn">
                         Zap!
                     </Button>
                 </div>
             </ExibirResposta>
-        </>
+        </div>
     )
 }
 const Virado = styled.div`

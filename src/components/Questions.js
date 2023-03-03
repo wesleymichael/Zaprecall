@@ -1,6 +1,6 @@
+import { useState } from "react";
 import styled from "styled-components";
 import Question from "./Question";
-import { useState } from "react";
 
 export default function Questions({deck, contador}){
     const [respondidos, setRespondidos] = useState([])

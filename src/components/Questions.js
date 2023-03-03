@@ -2,8 +2,7 @@ import { useState } from "react";
 import styled from "styled-components";
 import Question from "./Question";
 
-export default function Questions({deck, contador}){
-    const [respondidos, setRespondidos] = useState([])
+export default function Questions({deck, contador, filaRespostas, setFilaRespostas}){
 
     return(
         <ContainerQuestions>
@@ -12,9 +11,9 @@ export default function Questions({deck, contador}){
                     key={i}
                     card={card}
                     numeroPergunta={i+1}
-                    respondidos={respondidos}
-                    setRespondidos={setRespondidos}
                     contador={contador}
+                    filaRespostas={filaRespostas}
+                    setFilaRespostas={setFilaRespostas}
                 />
             ))}
         </ContainerQuestions>

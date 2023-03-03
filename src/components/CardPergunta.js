@@ -14,7 +14,7 @@ export function CardExibido({statusCard, card, mostrarResposta, seta_virar}){
 export const ExibirPergunta = styled.div`
     display: ${ (props) => props.statusCard === 'exibir_pergunta' ? 'flex' : 'none'};
     width: 300px;
-    height: 131px;
+    min-height: 131px;
     margin: 25px auto;
     background: #FFFFD5;
     box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.15);
@@ -25,11 +25,13 @@ export const ExibirPergunta = styled.div`
     position: relative;
     z-index: 0;
     align-items: flex-start;
+    word-break: break-word;
 
     h1{
         font-family: 'Recursive';
         font-weight: 400;
         margin-top: 15px;
+        margin-bottom: 60px;
     }
 
     button{

@@ -1,13 +1,16 @@
 import { useState } from "react";
-import Footer from "./components/Footer";
-import Header from "./components/Header";
-import TelaInicial from "./components/TelaInicial";
+import styled from "styled-components";
 import GlobalStyle from "./styles/GlobalStyle";
-import Questions from "./components/Questions";
 import deck from "./deck";
+import TelaInicial from "./components/TelaInicial";
+import Header from "./components/Header";
+import Questions from "./components/Questions";
+import Footer from "./components/Footer";
 
 export default function App() {
   const [respondidos, setRespondidos] = useState(0);
+  const [statusApp, setStatusApp] = useState('tela_inicial');
+  const [filaRespostas, setFilaRespostas] = useState([])
   const tamanhoDeck = deck.length;
 
   function contador(){
@@ -17,10 +20,26 @@ export default function App() {
   return (
     <>
       <GlobalStyle />
-      <TelaInicial />
-      <Header/>
-      <Questions deck={deck} contador={contador} />
-      <Footer respondidos={respondidos} total={tamanhoDeck} />
+      <TelaInicial statusApp={statusApp} setStatusApp={setStatusApp} />
+
+      <TelaZapRecall statusApp={statusApp} >
+        <Header />
+        <Questions
+          deck={deck}
+          contador={contador}
+          filaRespostas={filaRespostas}
+          setFilaRespostas={setFilaRespostas}
+        />
+        <Footer 
+          respondidos={respondidos}
+          total={tamanhoDeck}
+          filaRespostas={filaRespostas}
+        />
+      </TelaZapRecall>
     </>
   );
 }
+
+const TelaZapRecall = styled.div`
+  display: ${props => props.statusApp === 'tela_inicial' ? 'none' : ''};
+`

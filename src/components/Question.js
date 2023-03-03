@@ -8,7 +8,7 @@ import CardVirado from "./CardVirado";
 import {CardExibido} from "./CardPergunta";
 import CardResposta from "./CardResposta";
 
-export default function Question({card, numeroPergunta, respondidos, setRespondidos, contador}){
+export default function Question({card, numeroPergunta, contador, filaRespostas, setFilaRespostas}){
     const [statusCard, setStatuscard] = useState('virado');
     //VIRADO, EXIBIR_PERGUNTA, EXIBIR_RESPOSTA, AVALIADO
     const [iconePergunta, setIconePergunta] = useState(seta_play);
@@ -18,7 +18,6 @@ export default function Question({card, numeroPergunta, respondidos, setRespondi
     
 
     function mostrarPergunta(card){
-        setRespondidos([...respondidos, card]);
         setStatuscard('exibir_pergunta')
     }
 
@@ -33,19 +32,22 @@ export default function Question({card, numeroPergunta, respondidos, setRespondi
             case 'erro':
                 setIconePergunta(icone_erro);
                 setCor('#FF3030');
-                setIconeBtn('no-icon')
+                setIconeBtn('no-icon');
+                setFilaRespostas([...filaRespostas, icone_erro]);
                 break;
             
             case 'quase':
                 setIconePergunta(icone_quase);
                 setCor('#FF922E');
                 setIconeBtn('partial-icon');
+                setFilaRespostas([...filaRespostas, icone_quase]);
                 break;
             
             case 'certo':
                 setIconePergunta(icone_certo);
                 setCor('#2FBE34');
                 setIconeBtn('zap-icon');
+                setFilaRespostas([...filaRespostas, icone_certo]);
                 break;
 
             default:

@@ -11,6 +11,7 @@ export default function App() {
   const [respondidos, setRespondidos] = useState(0);
   const [statusApp, setStatusApp] = useState('tela_inicial');
   const [filaRespostas, setFilaRespostas] = useState([])
+  const [algumaErrada, setAlgumaErrada] = useState(false);
   const tamanhoDeck = deck.length;
 
   function contador(){
@@ -29,11 +30,13 @@ export default function App() {
           contador={contador}
           filaRespostas={filaRespostas}
           setFilaRespostas={setFilaRespostas}
+          setAlgumaErrada={setAlgumaErrada}
         />
         <Footer 
           respondidos={respondidos}
           total={tamanhoDeck}
           filaRespostas={filaRespostas}
+          algumaErrada={algumaErrada}
         />
       </TelaZapRecall>
     </>

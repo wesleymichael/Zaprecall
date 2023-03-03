@@ -1,8 +1,7 @@
-import { useState } from "react";
 import styled from "styled-components";
 import Question from "./Question";
 
-export default function Questions({deck, contador, filaRespostas, setFilaRespostas}){
+export default function Questions({deck, contador, filaRespostas, setFilaRespostas, setAlgumaErrada}){
 
     return(
         <ContainerQuestions>
@@ -14,6 +13,7 @@ export default function Questions({deck, contador, filaRespostas, setFilaRespost
                     contador={contador}
                     filaRespostas={filaRespostas}
                     setFilaRespostas={setFilaRespostas}
+                    setAlgumaErrada={setAlgumaErrada}
                 />
             ))}
         </ContainerQuestions>
@@ -22,5 +22,5 @@ export default function Questions({deck, contador, filaRespostas, setFilaRespost
 
 const ContainerQuestions = styled.div`
     margin-top: 130px;
-    margin-bottom: 95px;
+    margin-bottom: 180px;
 `

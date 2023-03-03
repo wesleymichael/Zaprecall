@@ -39,4 +39,4 @@ const HeaderStyled = styled.header`
         line-height: 45px;
         color: #FFFFFF;
     }
-`
+`;

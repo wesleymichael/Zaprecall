@@ -9,7 +9,7 @@ export default function TelaInicial({statusApp, setStatusApp}){
         <DivTelaInicial statusApp={statusApp} >
             <img src={logo} alt="logo" />
             <h1>ZapRecall</h1>
-            <button onClick={() => iniciarZapRecall()}>Inicial Recall</button>
+            <button onClick={() => iniciarZapRecall()} data-test="start-btn">Inicial Recall</button>
         </DivTelaInicial>
     );
 }
@@ -44,4 +44,4 @@ const DivTelaInicial = styled.div`
         font-size: 18px;
         color: #D70900;
     }
-`
+`;

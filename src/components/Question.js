@@ -8,17 +8,16 @@ import CardVirado from "./CardVirado";
 import {CardExibido} from "./CardPergunta";
 import CardResposta from "./CardResposta";
 
-export default function Question({card, numeroPergunta, contador, filaRespostas, setFilaRespostas}){
+export default function Question({card, numeroPergunta, contador, filaRespostas, setFilaRespostas, setAlgumaErrada}){
     const [statusCard, setStatuscard] = useState('virado');
     //VIRADO, EXIBIR_PERGUNTA, EXIBIR_RESPOSTA, AVALIADO
     const [iconePergunta, setIconePergunta] = useState(seta_play);
     //seta_play, icone_certo, icone_erro, icone_quase
     const [cor, setCor] = useState('#333333');
     const [iconeBtn, setIconeBtn] = useState('play-btn')
-    
 
     function mostrarPergunta(card){
-        setStatuscard('exibir_pergunta')
+        setStatuscard('exibir_pergunta');
     }
 
     function mostrarResposta(card){
@@ -33,21 +32,25 @@ export default function Question({card, numeroPergunta, contador, filaRespostas,
                 setIconePergunta(icone_erro);
                 setCor('#FF3030');
                 setIconeBtn('no-icon');
-                setFilaRespostas([...filaRespostas, icone_erro]);
+                filaRespostas.push({src: icone_erro, icone:'no-icon'});
+                setFilaRespostas(filaRespostas);
+                setAlgumaErrada(true);
                 break;
             
             case 'quase':
                 setIconePergunta(icone_quase);
                 setCor('#FF922E');
                 setIconeBtn('partial-icon');
-                setFilaRespostas([...filaRespostas, icone_quase]);
+                filaRespostas.push({src: icone_quase, icone:'partial-icon'});
+                setFilaRespostas(filaRespostas);
                 break;
             
             case 'certo':
                 setIconePergunta(icone_certo);
                 setCor('#2FBE34');
                 setIconeBtn('zap-icon');
-                setFilaRespostas([...filaRespostas, icone_certo]);
+                filaRespostas.push({src: icone_certo, icone:'zap-icon'});
+                setFilaRespostas(filaRespostas);
                 break;
 
             default:
@@ -67,7 +70,6 @@ export default function Question({card, numeroPergunta, contador, filaRespostas,
                     />
                 </div>
             );
-            break;
         
         case 'exibir_resposta':
             return (
@@ -79,7 +81,6 @@ export default function Question({card, numeroPergunta, contador, filaRespostas,
                     />
                 </div>
             );
-            break;
 
         default:
             return (
@@ -95,6 +96,5 @@ export default function Question({card, numeroPergunta, contador, filaRespostas,
                     />
                 </div>
             );
-            break;
     }
 }
